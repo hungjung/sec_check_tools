@@ -1,7 +1,9 @@
 @echo off
+
+@REM 避免亂碼
 chcp 65001
 
-:CheckOS
+@REM 確認作業系統是x86還是x64
 set archbit=""
 if "%PROCESSOR_ARCHITECTURE%"=="x86" (
   set archbit=x86
@@ -11,21 +13,22 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 
 cls
 
-REM 取IP位址
+@REM 取IP位址
 FOR /F "delims=: tokens=2" %%a in ('ipconfig ^| find "  IPv4"') do ( 
   if "!counter!"=="%1" goto :eof
   set IPAddress=%%a
   set /a counter+=1
 )
 
-REM 取主機名稱
+@REM 取主機名稱
 for /f %%i in ('hostname') do set hostname=%%i
 
-REM 取日期
+@REM 取日期
 set tmpDate=
 for /f "skip=1" %%x in ('wmic os get localdatetime') do if not defined tmpDate set tmpDate=%%x
 set YYYYMMDD=%tmpDate:~0,4%%tmpDate:~4,2%%tmpDate:~6,2%
 
+@REM ========主選單========
 :menu
 echo 主機名稱：%hostname%
 echo 執行路徑：%~dp0
@@ -53,8 +56,10 @@ echo -----------------------------------------------------
 echo 0 - 結束程式
 echo.
 
+@REM ========主選單取值========
 set /p end=請選擇要執行的項目(按0結束):
 
+@REM ========判斷要走哪個指令========
 if %end%==1 goto ip
 if %end%==2 goto winv
 if %end%==3 goto wf
@@ -72,6 +77,7 @@ if %end%==e goto submenu1
 
 if %end%==0 goto :eof
 
+@REM ========次選單 - 惡意程式檢測相關工具========
 :submenu1
 cls
 echo.
@@ -106,6 +112,7 @@ if %subend%==b (
 )
 if %subend%==0 goto :eof
 
+@REM ========次選單 - 軟體安裝檢查細項========
 :submenu2
 cls
 echo.
@@ -138,15 +145,7 @@ if %subopt%==b (
   goto menu
 )
 
-:host
-cls
-echo.
-echo 指令：hostname
-echo 主機名稱為：
-hostname
-pause
-cls
-goto menu
+@REM ========各項操作指令========
 
 :ip
 cls
