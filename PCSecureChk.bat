@@ -19,6 +19,7 @@ FOR /F "delims=: tokens=2" %%a in ('ipconfig ^| find "  IPv4"') do (
   set IPAddress=%%a
   set /a counter+=1
 )
+for /f "tokens=* delims= " %%a in ("%IPAddress%") do set IPAddress=%%a
 
 @REM 取主機名稱
 for /f %%i in ('hostname') do set hostname=%%i
@@ -228,7 +229,7 @@ compmgmt.msc
 goto menu
 
 :ncpa
-compmgmt.msc
+ncpa.cpl
 goto menu
 
 :eset
