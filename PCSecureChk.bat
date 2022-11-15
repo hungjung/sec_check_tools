@@ -161,22 +161,22 @@ goto menu
 
 :wf
 wf.msc
+cls
 goto menu
 
 :winv
-echo.
-echo 指令：ver
-ver
-echo.
 winver
+cls
 goto menu
 
 :event
 eventvwr
+cls
 goto menu
 
 :gp
-gpedit
+gpedit.msc
+cls
 goto menu
 
 :lstuser
@@ -214,22 +214,27 @@ goto menu
 
 :sflst
 control appwiz.cpl
+cls
 goto menu
 
 :tcl
 control timedate.cpl
+cls
 goto menu
 
 :scr
 control desk.cpl,,@screensaver
+cls
 goto menu
 
 :com
 compmgmt.msc
+cls
 goto menu
 
 :ncpa
 ncpa.cpl
+cls
 goto menu
 
 :eset
@@ -313,25 +318,25 @@ goto submenu1
 
 :pe
 if %archbit%=="x86" (
-  start "%~dp0\tools\procexp.exe"
+  start %~dp0\tools\procexp.exe
 ) else (
-  start "%~dp0\tools\procexp64.exe"
+  start %~dp0\tools\procexp64.exe
 )
 goto submenu1
 
 :autoruns
 if %archbit%=="x86" (
-  start "%~dp0\tools\Autoruns.exe"
+  start %~dp0\tools\Autoruns.exe
 ) else (
-  start "%~dp0\tools\Autoruns64.exe"
+  start %~dp0\tools\Autoruns64.exe
 )
 goto submenu1
 
 :tcpview
 if %archbit%=="x86" (
-  start "%~dp0\tools\tcpview.exe"
+  start %~dp0\tools\tcpview.exe
 ) else (
-  start "%~dp0\tools\tcpview64.exe"
+  start %~dp0\tools\tcpview64.exe
 )
 goto submenu1
 
